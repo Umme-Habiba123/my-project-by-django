@@ -1,13 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students Management</title>
+    <title>Student Details</title>
 </head>
-<body>
-      <h1>Student Management System</h1>
 
-    <p>Welcome to our student management system.</p>
+<body>
+
+    <h1>Student Details</h1>
+
+     <h2>
+        <a href="{% url 'student_detail' student.id %}">
+            {{ student.name }}
+        </a>
+    </h2>
+
+    
+
+    <p>Email: {{ student.email }}</p>
+    <p>Age: {{ student.age }}</p>
+
+    <a href="/">Back to Students</a>
+
 </body>
 </html>

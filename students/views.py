@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from .models import Students
+from .models import Student
 
 
 def home(request):
-    Students = Students.object.all()
+    students = Student.objects.all()
+
     return render(request, 'students/index.html',{
-        'students' : Students
+        'students' : students
     })
