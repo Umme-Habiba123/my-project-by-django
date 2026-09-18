@@ -43,5 +43,30 @@ def student_details(request, id):
      })
 
 
+def edit_student(request, id):
+     student = Student.objects.get(id=id)
+
+     if request.method == "POST":
+        form= StudentForm(request.POST, instance=student)
+
+        if form.is_valid():
+          form.save()
+          return redirect('home')
+     else:
+          form =StudentForm(instance=student)
+
+     return render(request, 'edit-student.html',{
+               'form':form
+          })
+
+
+     def student_details(request, id):
+         student= Student.objects.get(id=id)
+
+         return render(request, 'student-details',{
+             'student':student
+         })
+          
+
      
         
