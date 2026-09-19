@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,14 @@
 
 <body>
 
-    <h1>Student List</h1>
 
-    <a href="{% url 'add_student' %}">Add Student</a>
+
+    <h3>For Adding students : <a href="{% url 'add_student' %}">Add Student</a></h3>
 
     <br><br>
+
+
+        <h1>Student Data Table</h1>
 
     <table border="1" cellpadding="10">
         <thead>
@@ -22,8 +26,10 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Age</th>
-                <th>Action</th>
-            
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>Details</th>
+
             </tr>
         </thead>
 
@@ -35,18 +41,35 @@
                 <td>{{ student.id }}</td>
 
                 <td>
-                    
-                        {{ student.name }}
-                   
+
+                    {{ student.name }}
+
                 </td>
 
                 <td>{{ student.email }}</td>
 
                 <td>{{ student.age }}</td>
-                <td><a href="{% url 'edit-student' student.id %}">Edit</a>
-                 </td>
-                <td><a href="{% url 'student-details' student.id %}">Details</a>
-                 </td>
+                <td><a href="{% url 'edit-student' student.id %}">🔧</a>
+                </td>
+
+                <td>
+                    <form 
+                    method="POST" 
+                    action="{% url 'delete_student' student.id %}" style="display: inline;">
+
+                         {% csrf_token %}
+
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete?')">
+                            ❌
+                        </button>
+
+                    </form>
+                </td>
+
+
+                <td><a href="{% url 'student_details' student.id %}">🔍</a>
+                </td>
+
 
             </tr>
 
@@ -64,4 +87,5 @@
     </table>
 
 </body>
+
 </html>

@@ -38,7 +38,7 @@ def add_student(request):
 def student_details(request, id):
      student=Student.objects.get(id=id)
 
-     return render(request, 'student_details.html',{
+     return render(request, 'student-details.html',{
           'student':student
      })
 
@@ -59,13 +59,20 @@ def edit_student(request, id):
                'form':form
           })
 
+def delete_student(request, id):
+        student=Student.objects.get(id=id)
 
-     def student_details(request, id):
-         student= Student.objects.get(id=id)
+        if request.method == "POST":
+            student.delete()
+            return redirect('home')
+     
+        return redirect('home')
 
-         return render(request, 'student-details',{
-             'student':student
-         })
+
+
+
+
+  
           
 
      
