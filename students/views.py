@@ -12,16 +12,16 @@ def home(request):
 
 def add_student(request):
     if request.method == 'POST':
+        form=StudentForm(request.POST, request.FILES)
+
         # name= request.POST.get('name')
         # email=request.POST.get('email')
         # age=request.POST.get('email')
-        form=StudentForm(request.POST)
-
+    
         # Student.objects.create(
         #     name=name,
         #     email=email,
         #     age=age,
-
         # )
 
         if form.is_valid():

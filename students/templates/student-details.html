@@ -12,17 +12,24 @@
 
     <h1>Student Details</h1>
 
-    <p>
+    {% if student.image %}
+    <img src="{{student.image.url}}" alt="{{student.name}}" width="400" height="400">
+
+    {% else %}
+    <p>No Image</p>
+    {% endif %}
+
+    <h2>
         <strong>Name:</strong> {{ student.name }}
-    </p>
+    </h2>
 
-    <p>
+    <h2>
         <strong>Email:</strong> {{ student.email }}
-    </p>
+    </h2>
 
-    <p>
+    <h2>
         <strong>Age:</strong> {{ student.age }}
-    </p>
+    </h2>
 
     <br>
 
