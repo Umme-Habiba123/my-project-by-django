@@ -47,13 +47,24 @@ def edit_student(request, id):
      student = Student.objects.get(id=id)
 
      if request.method == "POST":
-        form= StudentForm(request.POST, instance=student)
+        form= StudentForm(request.POST, request.FILES,
+         instance=student)
 
         if form.is_valid():
+        
+          if request.POST.get('remove_image'):
+             student.image.delete(save=False)
+             student.image=None
+
+             form.save()
+             return redirect('home')
+
+        
           form.save()
           return redirect('home')
      else:
           form =StudentForm(instance=student)
+  
 
      return render(request, 'edit-student.html',{
                'form':form

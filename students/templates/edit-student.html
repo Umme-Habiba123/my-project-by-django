@@ -10,7 +10,22 @@
 
     <h1>Edit Student</h1>
 
-    <form method="POST">
+    {%if form.instance.image%}
+    <h3>Current Image :</h3>
+
+    <img src="{{form.instance.image.url}}" alt="{{form.instance.name}}
+    width=300"
+    height="300">
+
+    <lebel>
+            <input type="checkbox" name="remove_image">
+            Remove Image
+        </lebel>
+
+        
+    {%endif%}
+
+    <form method="POST" enctype="multipart/form-data">
 
         {% csrf_token %}
 
@@ -19,6 +34,9 @@
         <button type="submit">
             Update Student
         </button>
+
+
+        
 
     </form>
 
