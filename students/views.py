@@ -2,6 +2,15 @@ from django.shortcuts import render, redirect
 from .models import Student
 from .forms import StudentForm
 
+def signup(request):
+     context= {}
+
+     if request.methode== "POST":
+          username=request.POST.get('username')
+          password= request.POST.get('password')
+          confirm_pass =request.POST.get('confirm_pass')
+
+
 def home(request):
     students = Student.objects.all()
 
