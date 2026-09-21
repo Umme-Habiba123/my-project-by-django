@@ -8,30 +8,62 @@ from django.contrib.auth.decorators import login_required
 User=get_user_model()
 
 
-# login----
-def login_view(request):
+
+def signup(request):
     context = {}
 
     if request.method == "POST":
+
         username = request.POST.get('username')
         password = request.POST.get('password')
         confirm_pass = request.POST.get('confirm_pass')
 
-        if password == confirm_pass:
-            user = User(
-                username=username
-            )
-            user.set_password(password)
-            user.save()
+        if password != confirm_pass:
+            context = {
+                'error': 'Password and confirm password do not match'
+            }
+            return render(request, 'signup.html', context)
 
+        if User.objects.filter(username=username).exists():
+            context = {
+                'error': 'Username already exists'
+            }
+            return render(request, 'signup.html', context)
+
+        user = User(
+            username=username
+        )
+
+        user.set_password(password)
+        user.save()
+
+        return redirect('login')
+
+    return render(request, 'signup.html')
+
+# login----
+def login_view(request):
+
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None:
+            login(request, user)
             return redirect('home')
 
         else:
-            context = {
-                'error': 'Password and Confirm password do not match'
-            }
+            return render(request, 'login.html', {
+                'error': 'Invalid username or password'
+            })
 
-    return render(request, 'login.html', context)
+    return render(request, 'login.html')
 
 
 def logout_view(request):

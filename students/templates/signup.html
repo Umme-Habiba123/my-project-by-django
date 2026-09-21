@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-  <h1>Login</h1>
+    <h1>Signup</h1>
 
 <form method="POST">
     {% csrf_token %}
@@ -19,7 +19,11 @@
 
     <br><br>
 
-    <button type="submit">Login</button>
+    <input type="password" name="confirm_pass" placeholder="Confirm Password">
+
+    <br><br>
+
+    <button type="submit">Signup</button>
 </form>
 
 {% if error %}
@@ -27,8 +31,8 @@
 {% endif %}
 
 <p>
-    Don't have an account?
-    <a href="{% url 'signup' %}">Signup</a>
+    Already have an account?
+    <a href="{% url 'login' %}">Login</a>
 </p>
 </body>
 </html>
