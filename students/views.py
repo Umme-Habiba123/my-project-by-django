@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .models import Student
 from .forms import StudentForm
 from django.contrib.auth import authenticate, login, logout, get_user_model
-# from django.contrib.auth.models import CustomUser
+from django.contrib.auth.decorators import login_required
+ 
 
 User=get_user_model()
 
@@ -32,7 +33,13 @@ def login_view(request):
 
     return render(request, 'login.html', context)
 
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
           
+@login_required(login_url='login')
 
 def home(request):
     students = Student.objects.all()
@@ -110,6 +117,7 @@ def delete_student(request, id):
             return redirect('home')
      
         return redirect('home')
+
 
 
 
