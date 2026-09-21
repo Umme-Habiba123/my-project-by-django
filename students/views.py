@@ -1,14 +1,36 @@
 from django.shortcuts import render, redirect
 from .models import Student
 from .forms import StudentForm
+from django.contrib.auth import authenticate, login, logout, get_user_model
+# from django.contrib.auth.models import CustomUser
+
+User=get_user_model()
 
 def signup(request):
      context= {}
 
-     if request.methode== "POST":
+     if request.method == "POST":
           username=request.POST.get('username')
           password= request.POST.get('password')
           confirm_pass =request.POST.get('confirm_pass')
+
+          if password == confirm_pass:
+
+               user=User(
+
+                    username= username
+               )
+               user.set_password(password)
+               user.save()
+
+               return redirect('login')
+          else:
+               context={
+                    'error': "Password and Confirm password does not matched"
+               }     
+
+               return render(request, 'login.html', context)
+          return render(request, 'login.html', context)
 
 
 def home(request):

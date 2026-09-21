@@ -13,6 +13,8 @@ urlpatterns = [
 
     path('delete-student/<int:id>/',delete_student, name='delete_student'),
 
+    path('login/', login, name='login'),
+
 
 
     ]
