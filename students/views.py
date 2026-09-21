@@ -6,32 +6,33 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 
 User=get_user_model()
 
-def signup(request):
-     context= {}
 
-     if request.method == "POST":
-          username=request.POST.get('username')
-          password= request.POST.get('password')
-          confirm_pass =request.POST.get('confirm_pass')
+# login----
+def login_view(request):
+    context = {}
 
-          if password == confirm_pass:
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        confirm_pass = request.POST.get('confirm_pass')
 
-               user=User(
+        if password == confirm_pass:
+            user = User(
+                username=username
+            )
+            user.set_password(password)
+            user.save()
 
-                    username= username
-               )
-               user.set_password(password)
-               user.save()
+            return redirect('home')
 
-               return redirect('login')
-          else:
-               context={
-                    'error': "Password and Confirm password does not matched"
-               }     
+        else:
+            context = {
+                'error': 'Password and Confirm password do not match'
+            }
 
-               return render(request, 'login.html', context)
-          return render(request, 'login.html', context)
+    return render(request, 'login.html', context)
 
+          
 
 def home(request):
     students = Student.objects.all()
