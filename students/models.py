@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser) :
     display_name = models.CharField(max_length=255)
-    otp = models.IntegerField(null=True, blank=True)
+    otp = models.IntegerField(null=True, blank=True )
 
 
 
