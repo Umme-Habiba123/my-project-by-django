@@ -41,6 +41,10 @@ def signup(request):
 
     return render(request, 'signup.html')
 
+
+# def changepassword(request):
+
+
 # login----
 def login_view(request):
 
