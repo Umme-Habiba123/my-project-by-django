@@ -21,6 +21,8 @@ urlpatterns = [
 
     path('logout/', logout_view, name='logout'),
 
+    path('change_password/', change_password, name='change_password'),
+
 
 
     ]

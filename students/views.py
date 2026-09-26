@@ -3,6 +3,7 @@ from .models import Student
 from .forms import StudentForm
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
  
 
 User=get_user_model()
@@ -42,7 +43,23 @@ def signup(request):
     return render(request, 'signup.html')
 
 
-# def changepassword(request):
+def change_password(request):
+
+    Current_user = request.user
+
+    if request.method == 'POST':
+        Old_Password= request.POST.get('Old_Password')
+        New_Password= request.POST.get('New_Password')
+        New_Confirm_Password= request.POST.get('New_Confirm_Password')
+
+        if New_Password == New_Confirm_Password:
+           if check_password(Old_Password , Current_user.password):
+            Current_user.set_password( New_Password)
+            Current_user.save()
+           return redirect('/home')
+
+    return render(request, 'change_password.html')
+
 
 
 # login----

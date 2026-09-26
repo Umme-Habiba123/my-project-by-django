@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+    {% extends 'base.html'  %}
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Student List</title>
-</head>
 
-<body>
 
 
 
@@ -96,6 +90,8 @@
         <button>Logout</button>
     </a>
 
-</body>
+   <a href="{% url 'change_password' %}"> 
+    <button >Forget Password</button>
+   </a>
 
-</html>
+   {% endblock %}
