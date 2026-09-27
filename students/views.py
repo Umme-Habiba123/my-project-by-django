@@ -172,7 +172,18 @@ def delete_student(request, id):
         return redirect('home')
 
 
+# def StudentAddForm(request, )
 
+
+
+
+def studentUpdate(request, id):
+    student = Student.objects.get(id=id)
+    if request.method=='POST':
+        pass
+    else:
+        form =studentUpdate(isinstance=student)
+    return render(request, )    
 
 
 
