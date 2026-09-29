@@ -187,6 +187,11 @@ def studentUpdate(request, id):
 
 
 
+
+
+def job(request):
+    all()
+
   
           
 
