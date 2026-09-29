@@ -7,7 +7,7 @@ class CustomUser(AbstractUser) :
 
 
 
-# Create your models here.
+# Create your models here-----------
 class Student(models.Model):
     name = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
