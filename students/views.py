@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Student
+from .models import *
 from .forms import StudentForm
+from .forms import JobsForm
+# from  .models import Job
+
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
@@ -190,7 +193,30 @@ def studentUpdate(request, id):
 
 
 def job(request):
-    all()
+
+    job = Job.objects.all()
+
+    return render(request,'job.html',{
+        'job': job
+    }
+              )
+ 
+
+def home(request):
+    students = Student.objects.all()
+
+    return render(request, 'index.html',{
+        'students' : students
+    })
+
+
+
+    # if request.method=='POST':
+    #     job=JobsForm(request.POST):
+    #     JobsForm=Fir
+        
+
+
 
   
           
