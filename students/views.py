@@ -175,11 +175,6 @@ def delete_student(request, id):
         return redirect('home')
 
 
-# def StudentAddForm(request, )
-
-
-
-
 def studentUpdate(request, id):
     student = Student.objects.get(id=id)
     if request.method=='POST':
@@ -187,9 +182,6 @@ def studentUpdate(request, id):
     else:
         form =studentUpdate(isinstance=student)
     return render(request, )    
-
-
-
 
 
 def job(request):
@@ -200,21 +192,22 @@ def job(request):
         'job': job
     }
               )
+
+
+def addJob(request):
+    if request.method=="POST":
+
+     form=JobsForm(request.POST)
+     if form.is_valid()
+     form.save()
+     return redirect('job.html')
+    else:
+        form=JobsForm()
+    return render(request, 'addJob.html',{
+    form:form
+     })
  
 
-def home(request):
-    students = Student.objects.all()
-
-    return render(request, 'index.html',{
-        'students' : students
-    })
-
-
-
-    # if request.method=='POST':
-    #     job=JobsForm(request.POST):
-    #     JobsForm=Fir
-        
 
 
 

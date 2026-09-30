@@ -1,11 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Details</title>
-</head>
-<body>
-    <h1>Jobs Data Table</h1>
-</body>
-</html>
+{% block content %}
+
+
+<table class="table">
+    {% csrf_token %}
+
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>Position</th>
+            <th>Vacancy</th>
+            <th>Education</th>
+            <th>Skills</th>
+            <th>Image</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Details</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in job %}
+        <tr class="table-active">
+            <td>{{job.companyname }}</td>
+
+            <td>{{job.position }}</td>
+
+            <td>{{job.vacancy }}</td>
+
+            <td>{{job.education }}</td>
+
+
+            <td>{{job.skills }}</td>
+
+            <td>{% if job.image %}
+                <img src="" alt="" width="200" height="200">
+                {% else %}
+                no image
+                {% endif %}
+            </td>
+        </tr>
+  <td><a href="{% url 'edit-student' student.id %}">🔧</a>
+                </td>
+
+                <td>
+                    <form method="POST" action="{% url 'delete_student' student.id %}" style="display: inline;">
+
+                        {% csrf_token %}
+
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete?')">
+                            ❌
+                        </button>
+
+                    </form>
+                </td>
+
+
+                <td><a href="{% url 'student_details' student.id %}">🔍</a>
+                </td>
+
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="4">
+                    No students found.
+                </td>
+            </tr>
+
+            {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

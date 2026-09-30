@@ -29,7 +29,7 @@ class Job(models.Model):
     skills=models.CharField(max_length=100)
 
     image=models.ImageField(
-         upload_to='job',
+         upload_to='job/',
          blank=True,
          null=True   ,
         )

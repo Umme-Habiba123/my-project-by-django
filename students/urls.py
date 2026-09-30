@@ -23,9 +23,11 @@ urlpatterns = [
 
     path('change_password/', change_password, name='change_password'),
 
+    path('job/', job, name='job')
+    
+
 
     ]
 
-urlpatterns=[
-    path('job/', job, name='job')
-]
+# urlpatterns=[
+#     ]
