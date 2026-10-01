@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import StudentForm
+from .forms import *
 from .forms import JobsForm
 # from  .models import Job
 
@@ -197,17 +197,96 @@ def job(request):
 def addJob(request):
     if request.method=="POST":
 
-     form=JobsForm(request.POST)
-     if form.is_valid()
-     form.save()
-     return redirect('job.html')
+     form=JobsForm(request.POST, request.FILES)
+     
+     if form.is_valid():
+      form.save()
+      return redirect('job.html')
     else:
         form=JobsForm()
+        
     return render(request, 'addJob.html',{
     form:form
      })
  
+def registration(request):
+    
+    if request.method == 'POST':
+    
+      form=RegistrationForm(request.POST)
+    
+      if form.is_valid():
+        password=form.cleaned_data.get('password1')
+        
+        user=form.save(commit=False)
+        user.set_password(password)
+        user.save()
+        return redirect('signup')
+    
+    else:
+        form=RegistrationForm()
+        
+    return render (request, 'registration.html', {
+        form:form
+    })
+ 
 
+def userlogin(request):
+    if request.method=='POST':
+        form =LoginForm(request, data=request.POST)
+        
+        if form.is_valid():
+            
+           username = form.cleaned_data.get('username')
+        
+           password = form.cleaned_data.get('password')
+        
+        user=authenticate(username=username, password=password)
+        
+        if user:
+            login(request, user)
+            return redirect('homepage')
+        
+        else:
+            form=LoginForm()
+            
+        return render(request, 'loginform.html',{
+            'form':form
+        })
+        
+        
+def studentAddForm(request):
+    if request.method=='POST':
+        if form.is_valid():
+            form.save()
+            return redirect('job')
+        
+    else:
+        form=StudentForm()
+        
+        return render(request, 'job.html',{
+            'form':form
+        })
+        
+def StudentUpdate(request, id):
+    student = Student.objects.get(id=id)
+    
+    if request.method=='POST':
+        form=StudentForm(request.POST, instance=student)
+        
+        if form.is_valid():
+         form.save()
+        
+        return redirect('job')
+    else:
+        form= StudentForm(instance=student)
+    return redirect(request, 'job.html',{
+       'form':form
+    })
+    
+    
+    
+    
 
 
 
